@@ -1,0 +1,10 @@
+# requirements.txt
+fastapi
+uvicorn
+numpy
+Pillow
+requests
+tensorflow
+scikit-learn
+pymongo
+python-dotenv

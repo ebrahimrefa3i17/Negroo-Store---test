@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="/css/admin.css">
+    <style>
+        /* Custom styles for Hero Slides management */
+        .hero-slide-card {
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .hero-slide-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+        .hero-slide-card .card-body {
+            padding: 1rem;
+        }
+        .hero-slide-card .card-title {
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        .hero-slide-card .card-text {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        .hero-slide-card .slide-order {
+            font-weight: bold;
+            color: #007bff;
+        }
+        .hero-slide-card .slide-status.active {
+            color: #28a745; /* Green */
+        }
+        .hero-slide-card .slide-status.inactive {
+            color: #dc3545; /* Red */
+        }
+        /* Form specific styles */
+        #heroSlideForm .form-label {
+            font-weight: 600;
+        }
+        #imagePreviewContainer {
+            border: 1px dashed #ced4da;
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+            margin-top: 1rem;
+        }
+        #imagePreview {
+            max-width: 100%;
+            max-height: 200px;
+            object-fit: contain;
+            border-radius: 5px;
+            display: none; /* Hidden by default */
+        }
+        .image-placeholder {
+            color: #6c757d;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <%- include('../partials/admin-header', { activePage: activePage }) %>
+    <div class="admin-container">
+        <h2 class="section-heading"><i class="fas fa-images me-2"></i>Manage Hero Slides</h2>
+
+        <div class="d-flex justify-content-end mb-4">
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#heroSlideModal" id="addNewSlideBtn">
+                <i class="fas fa-plus-circle me-2"></i>Add New Slide
+            </button>
+        </div>
+
+        <div class="row" id="heroSlidesContainer">
+            <!-- Hero slides will be loaded here by JavaScript -->
+            <div class="col-12 text-center text-muted">Loading hero slides...</div>
+        </div>
+
+        <!-- Hero Slide Modal (Add/Edit) -->
+        <div class="modal fade" id="heroSlideModal" tabindex="-1" aria-labelledby="heroSlideModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="heroSlideModalLabel">Add/Edit Hero Slide</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="heroSlideForm" enctype="multipart/form-data">
+                            <input type="hidden" id="slideId">
+                            
+                            <div class="mb-3">
+                                <label for="slideTitle" class="form-label">Title</label>
+                                <input type="text" class="form-control" id="slideTitle" required maxlength="100">
+                            </div>
+                            <div class="mb-3">
+                                <label for="slideDescription" class="form-label">Description</label>
+                                <textarea class="form-control" id="slideDescription" rows="3" required maxlength="250"></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="slideButtonText" class="form-label">Button Text</label>
+                                <input type="text" class="form-control" id="slideButtonText" required maxlength="50">
+                            </div>
+                            <div class="mb-3">
+                                <label for="slideButtonLink" class="form-label">Button Link (URL)</label>
+                                <input type="url" class="form-control" id="slideButtonLink" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="slideOrder" class="form-label">Order (Lower number appears first)</label>
+                                <input type="number" class="form-control" id="slideOrder" value="0">
+                            </div>
+                            <div class="mb-3">
+                                <label for="slideImage" class="form-label">Image</label>
+                                <input type="file" class="form-control" id="slideImage" accept="image/*">
+                                <div id="imagePreviewContainer">
+                                    <img id="imagePreview" src="#" alt="Image Preview">
+                                    <p class="text-muted mt-2 image-placeholder" id="imagePlaceholder">No image selected</p>
+                                </div>
+                            </div>
+                            <div class="form-check form-switch mb-3">
+                                <input class="form-check-input" type="checkbox" id="slideIsActive" checked>
+                                <label class="form-check-label" for="slideIsActive">Is Active</label>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100" id="saveSlideBtn">Save Slide</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/toast.js"></script>
+    <script src="/js/auth.js"></script>
+    <script src="/js/admin-core.js"></script>
+    <script src="/js/admin-hero-slides.js"></script>
+</body>
+</html>

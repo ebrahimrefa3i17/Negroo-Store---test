@@ -1,0 +1,59 @@
+<footer class="bg-dark text-white text-center py-4 mt-5">
+    <p>&copy; 2025 The Light &amp; Wire Store. All rights reserved.</p>
+</footer>
+<div class="toast-container position-fixed bottom-0 end-0 p-3"></div>
+
+<div class="mini-cart-sidebar" id="mini-cart-sidebar">
+    <div class="mini-cart-header d-flex justify-content-between align-items-center">
+        <h5 class="offcanvas-title" id="miniCartOffcanvasLabel">Your Cart</h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close" id="close-mini-cart-btn"></button>
+    </div>
+    <div class="mini-cart-body d-flex flex-column">
+        <div id="mini-cart-items-container" class="flex-grow-1 overflow-auto mb-3">
+            <p class="text-center text-muted">Cart is empty.</p>
+        </div>
+        <div class="mt-auto">
+            <div class="d-flex justify-content-between fw-bold mb-2">
+                <span>Subtotal:</span>
+                <span id="mini-cart-total">EGP0.00</span>
+            </div>
+            <a href="/cart" class="btn btn-outline-primary w-100 mb-2">View Full Cart</a> <%# MODIFIED: Changed from cart.html to /cart %>
+            <a href="/checkout" id="mini-cart-checkout-btn" class="btn btn-primary w-100">Proceed to Checkout</a> <%# MODIFIED: Changed from checkout.html to /checkout %>
+        </div>
+    </div>
+</div>
+<div class="mini-cart-overlay" id="mini-cart-overlay"></div>
+
+<div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-dark text-white">
+                <h5 class="modal-title" id="searchModalLabel"><i class="fas fa-search me-2"></i>Global Search</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label for="modalSearchInput" class="form-label fw-bold">Search by Keyword:</label>
+                    <input type="text" class="form-control" id="modalSearchInput" placeholder="Search products by name or description...">
+                    <button type="button" class="btn btn-primary w-100 mt-2" id="modalTextSearchBtn">Search</button>
+                </div>
+                <hr>
+                <div class="text-center mb-3">
+                    <p class="fw-bold">OR</p>
+                </div>
+                <div class="mb-3 text-center">
+                    <label for="imageSearchInput" class="form-label fw-bold"><i class="fas fa-camera me-2"></i>Search by Image:</label>
+                    <input type="file" class="form-control" id="imageSearchInput" accept="image/*">
+                    <div class="mt-3" id="imagePreviewContainer" style="display: none;">
+                        <img id="imagePreview" src="#" alt="Image Preview" class="img-fluid rounded shadow-sm" style="max-height: 200px; object-fit: contain;">
+                        <p class="text-muted mt-2">Image will be used for visual search.</p>
+                    </div>
+                    <button type="button" class="btn btn-primary w-100 mt-2" id="modalImageSearchBtn" disabled>Search by Image</button>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

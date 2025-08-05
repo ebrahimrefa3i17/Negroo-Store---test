@@ -1,0 +1,413 @@
+/* Admin Panel General Styles */
+:root {
+    --bs-primary-rgb: 0, 128, 128;
+    --bs-primary: #008080;
+    --bs-primary-hover: #006666;
+    --bs-success-rgb: 40, 167, 69;
+    --bs-success: #28a745;
+    --bs-danger-rgb: 220, 53, 69;
+    --bs-danger: #dc3545;
+    --bs-warning-rgb: 255, 107, 107;
+    --bs-warning: #FF6B6B;
+    --bs-warning-hover: #e65c5c;
+    --bs-info-rgb: 23, 162, 184;
+    --bs-info: #17a2b8;
+    --bs-secondary-rgb: 108, 117, 125;
+    --bs-secondary: #6c757d;
+}
+body { font-family: 'Livvic', sans-serif; margin: 0; padding: 0; background-color: #f0f2f5; color: #343a40; line-height: 1.6; }
+.admin-header { background-color: var(--bs-primary); color: #fff; padding: 1.5rem; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+.admin-header h1 { font-weight: 700; font-size: 2.5rem; margin-bottom: 0; }
+.admin-nav { background-color: var(--bs-primary-hover); padding: 0.8rem 0; display: flex; align-items: center; justify-content: center; }
+.admin-nav ul { list-style: none; margin: 0; padding: 0; display: flex; justify-content: center; flex-wrap: wrap; }
+.admin-nav ul li { margin: 0 15px; }
+.admin-nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+.admin-nav ul li a:hover {
+    background-color: rgba(255,255,255,0.2);
+    transform: translateY(-2px);
+}
+.admin-nav ul li a.active {
+    background-color: var(--bs-primary);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+.admin-container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 0 25px rgba(0,0,0,0.1);
+}
+h2.section-heading {
+    font-size: 2.5rem;
+    color: var(--bs-primary);
+    text-align: center;
+    margin-bottom: 40px;
+    position: relative;
+    padding-bottom: 15px;
+}
+h2.section-heading::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    height: 3px;
+    width: 80px;
+    background-color: var(--bs-warning);
+    border-radius: 5px;
+}
+
+/* Dashboard Specific Styles */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 30px;
+}
+.stat-card {
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #e0e0e0;
+}
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+}
+.stat-card h4 {
+    margin-top: 15px;
+    margin-bottom: 10px;
+    color: #495057;
+    font-weight: 600;
+}
+.stat-card p {
+    font-size: 2.8em;
+    font-weight: 700;
+    color: var(--bs-primary);
+    margin-bottom: 0;
+}
+.stat-icon {
+    font-size: 3.5em;
+    color: var(--bs-primary);
+}
+.stat-card:nth-child(3) .stat-icon {
+    color: var(--bs-warning);
+}
+.stat-card:nth-child(3) p {
+    color: var(--bs-warning);
+}
+.stat-card:nth-child(4) .stat-icon {
+    color: var(--bs-success);
+}
+.stat-card:nth-child(4) p {
+    color: var(--bs-success);
+}
+.stat-card:nth-child(5) .stat-icon {
+    color: var(--bs-info);
+}
+.stat-card:nth-child(5) p {
+    color: var(--bs-info);
+}
+
+/* Table Styles (for Products, Orders, Categories) */
+table { width: 100%; border-collapse: separate; border-spacing: 0; margin-top: 20px; }
+th, td {
+    border: 1px solid #ddd;
+    padding: 12px 15px;
+    text-align: left;
+    vertical-align: middle;
+}
+th {
+    background-color: #e9ecef;
+    font-weight: 600;
+    color: #495057;
+    border-bottom: 2px solid var(--bs-primary);
+}
+th:first-child { border-top-left-radius: 8px; }
+th:last-child { border-top-right-radius: 8px; }
+tr:last-child td:first-child { border-bottom-left-radius: 8px; }
+tr:last-child td:last-child { border-bottom-right-radius: 8px; }
+
+.action-buttons a, .action-buttons button {
+    padding: 8px 12px;
+    border-radius: 5px;
+    text-decoration: none;
+    color: #fff;
+    margin-right: 5px;
+    cursor: pointer;
+    border: none;
+    font-size: 0.9em;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.action-buttons a:hover, .action-buttons button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+.edit-btn { background-color: var(--bs-primary); }
+.edit-btn:hover { background-color: var(--bs-primary-hover); }
+.delete-btn { background-color: var(--bs-danger); }
+.delete-btn:hover { background-color: #c82333; }
+.view-btn { background-color: var(--bs-info); }
+.view-btn:hover { background-color: #117a8b; }
+.cancel-btn { background-color: var(--bs-danger); }
+.cancel-btn:hover { background-color: #c82333; }
+
+/* Add New Button (for Products and Categories pages) */
+.add-btn, .add-product-btn {
+    background-color: var(--bs-primary);
+    color: #fff;
+    padding: 12px 20px;
+    text-decoration: none;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+.add-btn:hover, .add-product-btn:hover {
+    background-color: var(--bs-primary-hover);
+    transform: translateY(-2px);
+}
+
+/* Thumbnails for Product/Category Tables */
+.product-thumb {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 6px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+.category-thumb {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 6px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Order Status Badges */
+.status-badge {
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    color: #fff;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+.status-Pending { background-color: var(--bs-warning); color: #000; }
+.status-Processing { background-color: var(--bs-primary); }
+.status-Shipped { background-color: var(--bs-info); }
+.status-Delivered { background-color: var(--bs-success); }
+.status-Cancelled { background-color: var(--bs-danger); }
+
+/* Sortable Table Headers */
+.sortable-header {
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    transition: color 0.2s ease;
+}
+.sortable-header:hover {
+    color: var(--bs-primary);
+}
+.sort-icon {
+    font-size: 0.8em;
+    opacity: 0.6;
+    width: 12px;
+    text-align: center;
+}
+.sortable-header.asc .sort-icon.fa-sort-up { opacity: 1; color: var(--bs-primary); }
+.sortable-header.desc .sort-icon.fa-sort-down { opacity: 1; color: var(--bs-primary); }
+.sortable-header:not(.asc):not(.desc) .sort-icon.fa-sort { opacity: 1; color: #888; }
+
+/* Form Styles (for ProductForm, CategoryForm) */
+.form-group { margin-bottom: 15px; }
+.form-group label { display: block; margin-bottom: 8px; font-weight: 600; color: #495057; }
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group textarea,
+.form-group select,
+.form-group input[type="file"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 1rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.form-group input[type="text"]:focus,
+.form-group input[type="number"]:focus,
+.form-group textarea:focus,
+.form-group select:focus,
+.form-group input[type="file"]:focus {
+    border-color: var(--bs-primary);
+    box-shadow: 0 0 0 0.25rem rgba(var(--bs-primary-rgb), 0.25);
+    outline: none;
+}
+.form-group textarea { resize: vertical; min-height: 100px; }
+.btn-submit {
+    background-color: var(--bs-primary);
+    color: #fff;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+.btn-submit:hover {
+    background-color: var(--bs-primary-hover);
+    transform: translateY(-2px);
+}
+.btn-cancel {
+    background-color: var(--bs-secondary);
+    color: #fff;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: 600;
+    margin-left: 10px;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+.btn-cancel:hover {
+    background-color: #5a6268;
+    transform: translateY(-2px);
+}
+
+/* Image/Video Preview for Forms */
+.image-preview-container {
+    margin-top: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    padding: 10px;
+    border: 1px dashed #ccc;
+    border-radius: 8px;
+    background-color: #f8f8f8;
+}
+.image-preview {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+.image-preview.hidden {
+    display: none;
+}
+
+/* Order Details Specific Styles */
+.order-info, .order-items, .order-summary { margin-bottom: 20px; padding: 15px; border: 1px solid #ddd; border-radius: 5px; background-color: #f9f9f9; }
+.order-info h3, .order-items h3, .order-summary h3 { color: var(--bs-primary); margin-bottom: 15px; font-weight: 600;}
+.order-info p { margin-bottom: 5px; }
+.order-items table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+.order-items th, .order-items td { border: 1px solid #eee; padding: 8px; text-align: left; }
+.order-items th { background-color: #e9e9e9; }
+.order-summary p { font-weight: bold; }
+
+/* Responsive Adjustments for Admin Panel */
+@media (max-width: 992px) {
+    .stats-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+    }
+}
+@media (max-width: 768px) {
+    .admin-header h1 { font-size: 2rem; }
+    .admin-nav ul { align-items: center; }
+    .admin-nav ul li { margin: 5px 0; }
+    .admin-container { padding: 20px; margin: 20px auto; }
+    .stats-grid { grid-template-columns: 1fr; }
+    .stat-card p { font-size: 2.2em; }
+    .stat-icon { font-size: 3em; }
+
+    /* ✅ تم إزالة قواعد display: block; للجداول من هنا */
+    /*
+    table, thead, tbody, th, td, tr {
+        display: block;
+    }
+    thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+    tr { border: 1px solid #ddd; margin-bottom: 15px; border-radius: 8px; overflow: hidden; }
+    td {
+        border: none;
+        border-bottom: 1px solid #eee;
+        position: relative;
+        padding-left: 50%;
+        text-align: right;
+    }
+    td:before {
+        position: absolute;
+        top: 12px;
+        left: 6px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+        text-align: left;
+        font-weight: 600;
+        color: #555;
+    }
+    */
+    /* Labels for responsive table - Products */
+    td:nth-of-type(1):before { content: "ID:"; }
+    td:nth-of-type(2):before { content: "Image:"; }
+    td:nth-of-type(3):before { content: "Name:"; }
+    td:nth-of-type(4):before { content: "Category:"; }
+    td:nth-of-type(5):before { content: "Price:"; }
+    td:nth-of-type(6):before { content: "Stock:"; }
+    td:nth-of-type(7):before { content: "Actions:"; }
+    /* Labels for responsive table - Categories */
+    td:nth-of-type(1):before { content: "ID:"; }
+    td:nth-of-type(2):before { content: "Image:"; }
+    td:nth-of-type(3):before { content: "Name:"; }
+    td:nth-of-type(4):before { content: "Description:"; }
+    td:nth-of-type(5):before { content: "Actions:"; }
+    /* Labels for responsive table - Orders */
+    td:nth-of-type(1):before { content: "Order ID:"; }
+    td:nth-of-type(2):before { content: "Customer:"; }
+    td:nth-of-type(3):before { content: "Total:"; }
+    td:nth-of-type(4):before { content: "Status:"; }
+    td:nth-of-type(5):before { content: "Date:"; }
+    td:nth-of-type(6):before { content: "Actions:"; }
+
+    .action-buttons { text-align: right; padding-top: 10px; padding-bottom: 10px; }
+    .sortable-header { display: inline-flex; text-align: left; }
+
+    /* Form Buttons Responsive */
+    .btn-submit, .btn-cancel { width: 100%; margin-left: 0; margin-top: 10px; }
+}
+@media (max-width: 576px) {
+    .admin-header h1 { font-size: 2rem; }
+    .admin-nav ul { align-items: center; }
+    .admin-nav ul li { margin: 5px 0; }
+    .add-btn, .add-product-btn { width: 100%; justify-content: center; }
+}

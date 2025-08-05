@@ -1,0 +1,29 @@
+<%# views/partials/admin-header.ejs %>
+<header class="admin-header">
+    <h1>Negroo Admin Panel</h1>
+</header>
+<nav class="admin-nav">
+    <ul>
+        <li><a href="/admin" class="<%= typeof activePage !== 'undefined' && activePage === 'dashboard' ? 'active' : '' %>"><i class="fas fa-tachometer-alt me-2"></i>Dashboard</a></li>
+        <li><a href="/admin/products" class="<%= typeof activePage !== 'undefined' && activePage === 'products' ? 'active' : '' %>"><i class="fas fa-boxes me-2"></i>Products</a></li>
+        <li><a href="/admin/orders" class="<%= typeof activePage !== 'undefined' && activePage === 'orders' ? 'active' : '' %>"><i class="fas fa-receipt me-2"></i>Orders</a></li>
+        <li><a href="/admin/categories" class="<%= typeof activePage !== 'undefined' && activePage === 'categories' ? 'active' : '' %>"><i class="fas fa-tags me-2"></i>Categories</a></li>
+        <%# ✅ NEW: Link for Collections Management %>
+        <li><a href="/admin/collections" class="<%= typeof activePage !== 'undefined' && activePage === 'collections' ? 'active' : '' %>"><i class="fas fa-layer-group me-2"></i>Collections</a></li> <%# Using fas fa-layer-group for collections %>
+        <li><a href="/admin/users" class="<%= typeof activePage !== 'undefined' && activePage === 'users' ? 'active' : '' %>"><i class="fas fa-users-cog me-2"></i>Users</a></li>
+        <li><a href="/admin/reviews" class="<%= typeof activePage !== 'undefined' && activePage === 'reviews' ? 'active' : '' %>"><i class="fas fa-star-half-alt me-2"></i>Reviews</a></li>
+        <li><a href="/admin/coupons" class="<%= typeof activePage !== 'undefined' && activePage === 'coupons' ? 'active' : '' %>"><i class="fas fa-ticket-alt me-2"></i>Coupons</a></li>
+        
+        <%# Link for Hero Slides Management %>
+        <li><a href="/admin/hero-slides" class="<%= typeof activePage !== 'undefined' && activePage === 'hero-slides' ? 'active' : '' %>"><i class="fas fa-images me-2"></i>Hero Slides</a></li>
+
+        <%# Link for Promo Slides Management %>
+        <li><a href="/admin/promo-slides" class="<%= typeof activePage !== 'undefined' && activePage === 'promo-slides' ? 'active' : '' %>"><i class="fas fa-ad me-2"></i>Promo Slides</a></li>
+
+        <%# Link for Gallery Images Management %>
+        <li><a href="/admin/gallery-images" class="<%= typeof activePage !== 'undefined' && activePage === 'gallery-images' ? 'active' : '' %>"><i class="fas fa-photo-video me-2"></i>Gallery Images</a></li>
+
+        <li><a href="/"><i class="fas fa-store me-2"></i>Go to Store</a></li>
+        <li class="ms-auto"><button id="logout-button" class="btn btn-danger btn-sm"><i class="fas fa-sign-out-alt me-2"></i>Logout</button></li>
+    </ul>
+</nav>

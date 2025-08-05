@@ -1,0 +1,924 @@
+/* Define custom colors for Tailwind */
+:root {
+    --color-navy-teal-dark: #004d4d; /* Darker Navy Teal */
+    --color-navy-teal-light: #008080; /* Standard Teal for accents */
+    --color-white: #ffffff;
+    --color-gray-text: #333333;
+    --color-light-gray: #f8fafc;
+    --bs-primary-bg-subtle:#008080dc; /* Use the same teal for primary background subtle */
+    --bs-primary-text-emphasis:#008080dc; /* Use the same teal for primary text emphasis */
+    --bs-accordion-active-color:#ffffff ;
+    --bs-list-group-active-border-color: #008080;
+     --bs-list-group-active-bg:  #008080; 
+     --bs-accordion-active-color: #008080; /* Primary blue */
+     --bs-accordion-active-bg: #008080; /* Primary blue */
+    --bs-accordion-btn-focus-box-shadow: 0 0 0 3px rgba(0, 128, 128, 0.25); /* Teal focus shadow */
+}
+/* CTA Button Styles */
+.cta-button {
+    background-color: var(--color-navy-teal-light); /* Teal button */
+    color: var(--color-white);
+    font-weight: bold;
+    padding: 1rem 2.5rem;
+    border-radius: 9999px; /* Fully rounded */
+    box-shadow: 0 8px 15px rgba(0, 128, 128, 0.3); /* Teal shadow */
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+    border: none;
+    outline: none;
+}
+.cta-button:hover {
+    background-color: #006666; /* Slightly darker teal on hover */
+    transform: translateY(-3px) scale(1.01);
+    box-shadow: 0 12px 20px rgba(0, 128, 128, 0.4);
+}
+.cta-button:active {
+    transform: translateY(0) scale(0.99);
+    box-shadow: 0 5px 10px rgba(0, 128, 128, 0.2);
+}
+
+
+/* Base styles for Inter font and body */
+body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    overflow-x: hidden; /* Prevent horizontal scroll */
+    background-color: var(--color-light-gray);
+    color: var(--color-gray-text);
+}
+
+/* Navbar Styles */
+.navbar {
+    transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+.navbar.scrolled {
+    background-color: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    backdrop-filter: blur(8px); /* Frosted glass effect */
+}
+.nav-link-custom { /* Custom class to avoid conflict with Bootstrap's .nav-link */
+    position: relative;
+    padding: 0.5rem 0;
+    transition: color 0.3s ease-in-out;
+}
+.nav-link-custom::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background-color: var(--color-navy-teal-light); /* Teal underline */
+    transition: width 0.3s ease-in-out, left 0.3s ease-in-out;
+}
+.nav-link-custom:hover::after {
+    width: 100%;
+    left: 0;
+}
+
+/* Carousel Base Styles */
+.carousel-container {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+}
+.carousel-track {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+/* For full-width carousels (Hero, Promo) */
+.carousel-slide.full-width-slide {
+    min-width: 100%;
+    box-sizing: border-box;
+    position: relative;
+}
+/* For multi-item carousels (Products, Gallery) */
+.carousel-slide.multi-item-slide {
+    flex-shrink: 0; /* Prevent items from shrinking */
+    box-sizing: border-box;
+    padding: 0.5rem; /* Padding between items */
+}
+/* Responsive widths for multi-item slides */
+.product-carousel .carousel-slide.multi-item-slide {
+    width: 100%; /* Default to 1 item per view on mobile */
+}
+@media (min-width: 640px) { /* sm */
+    .product-carousel .carousel-slide.multi-item-slide {
+        width: 50%; /* 2 items per view on small screens */
+    }
+}
+@media (min-width: 768px) { /* md */
+    .product-carousel .carousel-slide.multi-item-slide {
+        /*width: 33.333%; /* 3 items per view on medium screens */
+    }
+}
+@media (min-width: 1024px) { /* lg */
+    .product-carousel .carousel-slide.multi-item-slide {
+        width: 25%; /* 4 items per view on large screens */
+    }
+    .lg\:px-12{
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+}
+
+.gallery-carousel .carousel-slide.multi-item-slide {
+    width: 100%; /* Default to 1 item per view on mobile */
+}
+@media (min-width: 640px) { /* sm */
+    .gallery-carousel .carousel-slide.multi-item-slide {
+        width: 50%; /* 2 items per view on small screens */
+    }
+}
+@media (min-width: 768px) { /* md */
+    .gallery-carousel .carousel-slide.multi-item-slide {
+        width: 33.333%; /* 3 items per view on medium screens */
+    }
+}
+@media (min-width: 1024px) { /* lg */
+    .gallery-carousel .carousel-slide.multi-item-slide {
+        width: 25%; /* 4 items per view on large screens */
+    }
+}
+
+
+.carousel-dot {
+    width: 10px;
+    height: 10px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    margin: 0 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.carousel-dot.active {
+    background-color: var(--color-navy-teal-light);
+}
+.carousel-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10;
+    transition: background-color 0.3s ease;
+}
+.carousel-button:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+.carousel-button.prev { left: 10px; }
+.carousel-button.next { right: 10px; }
+
+/* Hero Carousel specific styles */
+.hero-carousel-slide {
+    height: 80vh; /* Adjust height as needed */
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    position: relative;
+}
+.hero-carousel-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4); /* Dark overlay for text readability */
+    z-index: 0;
+}
+.hero-carousel-content {
+    position: relative;
+    z-index: 1;
+    max-width: 800px;
+    padding: 2rem;
+    animation: fadeIn 1s ease-out forwards;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Product Card Styles for Uniform Height (تنسيقات كروت المنتجات لارتفاع موحد) */
+.product-card {
+    background-color: var(--color-white);
+    border: 1px solid #e2e8f0; /* Light border */
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    border-radius: 0.75rem; /* rounded-xl */
+    overflow: hidden;
+    width: 100%; /* Ensure card takes full width of its slide */
+    
+    /* Layout: Image on top, Content below */
+    display: flex;
+    flex-direction: column; 
+    height: 600px; /* Fixed height for consistency and 50/50 split */
+}
+.product-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+}
+.product-card img {
+    transition: transform 0.3s ease-in-out;
+}
+.product-card:hover img {
+    transform: scale(1.03); /* Subtle zoom on hover */
+}
+/* Product actions overlay (price & add to cart on image) */
+.product-actions {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+.product-card:hover .product-actions {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Image section (top half of card) */
+.product-card-image-section-v2 { /* The original .relative div */
+    position: relative; /* Needed for product-actions absolute positioning */
+    width: 100%;
+    height: 300px; /* Half of 480px total height */
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.product-card-image-section-v2 img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensure image covers the area without distortion */
+}
+
+/* Content area (bottom half of card) */
+.product-card-content-section-v2 { /* This is the original .p-5 div */
+    display: flex;
+    flex-direction: column; /* Stack name/desc, then variants/price */
+    flex-grow: 1; /* Allow content area to take available vertical space */
+    padding: 1.25rem; /* Equivalent to p-5 in Tailwind */
+    height: 240px; /* Half of 480px total height */
+    justify-content: space-between; /* Push variants/price row to bottom */
+}
+
+/* Row for Variants and Price (New element at the very bottom of content section) */
+.product-variants-price-row-v2 {
+    display: flex;
+    justify-content: space-between; /* Puts variants on left, price on right */
+    align-items: flex-end; /* Align price to bottom of its container */
+    margin-top: auto; /* Push this row to the very bottom of product-card-content-section-v2 */
+}
+
+/* Flex container for current and original prices, stacked vertically if discount exists */
+.product-price-display-v2 {
+    display: flex;
+    flex-direction: column; /* Stack current price and original price vertically */
+    align-items: flex-end; /* Align prices to the right within their container */
+    text-align: right; /* Ensure text aligns right */
+}
+
+
+/* Fixed height for Product Name (h3) */
+.product-card-content-section-v2 h3 {
+    height: 3.5em; /* Approximately 2 lines of text */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Limit to 2 lines */
+    -webkit-box-orient: vertical;
+    margin-bottom: 0.5rem;
+}
+
+/* Fixed height for Description (p.text-gray-600) */
+.product-card-content-section-v2 p.text-gray-600 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* Limit description to 3 lines */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-height: 4.5em; /* Approximate height for 3 lines */
+    margin-bottom: 0.75rem;
+}
+
+/* Container for variant display (inside product-variants-price-row-v2) */
+.product-card-content-section-v2 .variant-display-container {
+    min-height: 1.5em; /* Enough space for one line of "Available in: ..." text */
+    flex-shrink: 0;
+}
+
+/* No responsive adjustments for card layout here, as it's always vertical */
+/* Remove any previous @media rules for .product-card flex-direction here */
+@media (min-width: 768px) { /* md */
+    /* Remove any previous product-card layout changes here */
+}
+
+/* Mini Cart Sidebar */
+.mini-cart-sidebar {
+    position: fixed;
+    top: 0;
+    right: -450px;
+    width: 450px;
+    height: 100%;
+    background-color: #ffffff;
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.15);
+    transition: right 0.3s ease-in-out;
+    z-index: 1050;
+    display: flex;
+    flex-direction: column;
+}
+
+.mini-cart-sidebar.open {
+    right: 0;
+}
+
+.mini-cart-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1040;
+    display: none;
+}
+
+.mini-cart-overlay.open {
+    display: block;
+}
+
+.mini-cart-header {
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid #e9ecef;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f8f9fa;
+}
+
+.mini-cart-header h4 {
+    margin-bottom: 0;
+    font-weight: 600;
+}
+
+.mini-cart-close-btn {
+    background: none;
+    border: none;
+    font-size: 1.6rem;
+    color: #6c757d;
+    transition: color 0.2s ease;
+}
+.mini-cart-close-btn:hover {
+    color: #343a40;
+}
+
+.mini-cart-items-container {
+    flex-grow: 1;
+    padding: 1rem 0.5rem;
+    overflow-y: auto;
+}
+
+.mini-cart-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    border-bottom: 1px dashed #e9ecef;
+    padding-bottom: 1rem;
+}
+
+.mini-cart-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.mini-cart-item img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-right: 1rem;
+}
+
+/* ✅ NEW: Styles for checkout item images */
+.checkout-item-image {
+    width: 128px; /* Fixed width */
+    height: 128px; /* Fixed height */
+    object-fit: cover; /* Ensures image covers the area without distortion */
+    border-radius: 8px; /* Slightly rounded corners */
+    flex-shrink: 0; /* Prevents image from shrinking */
+}
+
+.order-summary-item-detail{
+    font-size: larger;
+}
+.mini-cart-item-details {
+    flex-grow: 1;
+}
+
+.mini-cart-item-details h6 {
+    margin-bottom: 0.25rem;
+    font-size: 1.05rem;
+    font-weight: 500;
+}
+
+.mini-cart-item-details p {
+    font-size: 0.9rem;
+    color: #6c757d;
+    margin-bottom: 0.25rem;
+}
+
+.mini-cart-item-price {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: #007bff;
+}
+
+.mini-cart-quantity-controls {
+    display: flex;
+    align-items: center;
+    margin-left: 1rem;
+}
+
+.quantity-btn-mini-cart {
+    background-color: #e9ecef;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    padding: 0.25rem 0.6rem;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.quantity-btn-mini-cart:hover {
+    background-color: #dee2e6;
+}
+
+.item-quantity-input-mini-cart {
+    width: 45px;
+    text-align: end;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    margin: 0 0.3rem;
+    padding: 0.25rem;
+    font-size: 0.85rem;
+}
+
+.mini-cart-remove-btn {
+    background: none;
+    border: none;
+    color: #dc3545;
+    font-size: 1.1rem;
+    margin-left: 0.6rem;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+.mini-cart-remove-btn:hover {
+    color: #c82333;
+}
+
+.mini-cart-footer {
+    padding: 1.2rem 1.5rem;
+    border-top: 1px solid #e9ecef;
+    background-color: #f8f9fa;
+}
+
+.mini-cart-total {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 1.2rem;
+}
+
+/* Search Modal styles */
+#searchModal .modal-content {
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+#searchModal .modal-header {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+#searchModal .modal-body {
+    padding-top: 0;
+}
+
+#imagePreviewContainer {
+    display: none;
+    text-align: center;
+    margin-top: 1rem;
+    border: 1px dashed #ced4da;
+    border-radius: 8px;
+    padding: 1rem;
+}
+
+#imagePreview {
+    max-width: 150px;
+    max-height: 150px;
+    object-fit: contain;
+    border-radius: 5px;
+}
+/* Toast Notifications (from toast.js) */
+.toast-container {
+    z-index: 1060;
+}
+
+.toast {
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border: none;
+}
+
+.toast.success {
+    background-color: #d4edda;
+    color: #155724;
+    border-left: 5px solid #28a745;
+}
+
+.toast.danger {
+    background-color: #f8d7da;
+    color: #721c24;
+    border-left: 5px solid #dc3545;
+}
+
+.toast.warning {
+    background-color: #fff3cd;
+    color: #856404;
+    border-left: 5px solid #ffc107;
+}
+
+.toast.info {
+    background-color: #d1ecf1;
+    color: #0c5460;
+    border-left: 5px solid #17a2b8;
+}
+
+/* Confirmation Modal */
+#confirmationModal .modal-content {
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+#confirmationModal .modal-header {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+#confirmationModal .modal-body {
+    padding-top: 0;
+}
+.hide-on-mobile {
+    display: none;
+}
+/* --- Categories Dropdown Enhancements --- */
+
+
+/* Mobile Filters Sidebar */
+#filters-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0; /* Starts hidden off-screen */
+    width: 280px; /* Width of the sidebar */
+    height: 100%;
+    background-color: #ffffff;
+    box-shadow: 5px 0 15px rgba(0, 0, 0, 0.15);
+    z-index: 1060; /* Above other modals */
+    transform: translateX(-100%); /* Initially off-screen to the left */
+    transition: transform 0.3s ease-in-out;
+}
+
+#filters-sidebar.mobile-filters-open {
+    transform: translateX(0); /* Slides in from the left */
+}
+
+#filters-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1055; /* Below filters sidebar, above other content */
+    display: none; /* Hidden by default */
+}
+/* Ensure overlay is shown when sidebar is open */
+#filters-sidebar.mobile-filters-open + #filters-overlay {
+    display: block;
+}
+
+/* REMOVED: Hide filters sidebar on desktop - now it behaves consistently as an overlay */
+/* @media (min-width: 768px) {
+    #filters-sidebar {
+        position: sticky;
+        top: 100px;
+        transform: translateX(0);
+        box-shadow: none;
+        width: 25%;
+        max-height: calc(100vh - 120px);
+        overflow-y: auto;
+    }
+    #filters-overlay {
+        display: none !important;
+    }
+} */
+
+/* --- Categories Dropdown Enhancements --- */
+/* Base styling for the dropdown menu (ul element) */
+#categories-dropdown {
+    /* Override default Tailwind positioning for precise alignment */
+    top: 100%; /* Ensures it starts exactly below the button */
+    left: -40px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    margin-top: 26px;
+
+    /* Add smooth transitions for opacity, transform, and visibility */
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out, visibility 0.3s ease-out;
+
+    /* Ensure it overlays other content, Tailwind's z-20 is good */
+    /* z-index: 20; */ 
+    
+    /* Ensure it has enough width, Tailwind's w-48 (12rem) is good, but can be adjusted if needed */
+    /* width: 12rem; */
+}
+
+/* Style for when the parent group is hovered (making the dropdown visible) */
+/* This overrides Tailwind's group-hover:block */
+.group:hover #categories-dropdown {
+    opacity: 1;         /* Fade in to full visibility */
+    visibility: visible;/* Make it interactive and visible */
+    transform: translateY(0); /* Move to its final position */
+}
+
+/* Styling for individual list items (links) within the dropdown */
+#categories-dropdown li a {
+    padding: 0.65rem 1.25rem; /* Adjust padding for better spacing (Tailwind's px-4 py-2 is 1rem 0.5rem) */
+    white-space: nowrap;      /* Prevents category names from wrapping to the next line */
+    display: block;           /* Ensure the entire padding area is clickable */
+}
+
+/* Optional: Add a subtle border to define the dropdown better */
+#categories-dropdown {
+    border: 1px solid rgba(0, 0, 0, 0.08); /* A very light border */
+    /* Tailwind's shadow-lg already provides a good shadow */
+}
+.text-gray-700{
+    font-weight: bold;
+
+}
+
+/* ✅ NEW: Force visibility for Bootstrap collapse content */
+.collapse {
+    visibility: visible !important;
+}
+
+@media (min-width: 1280px) {
+    .xl\:w-1\/5 {
+        width: 100%;
+    }
+}
+@media (max-width: 375px) {
+    .logo {
+        width: 200px; /* Adjust logo width for smaller screens */
+    }
+    
+}
+@media (max-width: 320px) {
+    .logo {
+        width: 150px; /* Adjust logo width for smaller screens */
+    }
+    
+}
+@media (min-width: 1024px) { /* lg */
+    .lg\:px-12{
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+}
+#profile-info-form{
+    padding-bottom: 35px;
+}
+.list-group-item.active {
+    background-color:  #008080 !important;
+    border-color:  #008080 !important;
+
+}
+#all-categories-container a {
+    height: 370px;
+}
+.btn-primary  {
+    --bs-btn-color: #fff;
+    --bs-btn-bg: #008080 !important; /* Primary blue */
+    --bs-btn-border-color: #008080 !important;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg:#004d4d !important; /* Darker Navy Teal */
+    --bs-btn-hover-border-color: #004d4d !important;
+    --bs-btn-focus-shadow-rgb: 49, 132, 253;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: #008080 !important;
+    --bs-btn-active-border-color: #008080 !important;
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    --bs-btn-disabled-color: #fff;
+    --bs-btn-disabled-bg: #004d4d !important;
+    --bs-btn-disabled-border-color: #004d4d !important;
+}
+.nav-link{
+    color: #008080 !important; /* Primary blue */
+    font-weight: 700;
+}
+.nav-link:active,.nav-tabs .nav-link:focus, .nav-tabs .nav-link:hover{
+    color: #ffffff !important; /* Primary blue */
+    font-weight: 700;
+    background-color: #008080 !important; /* Primary blue */
+}
+.contact-form {
+    box-shadow: 0 8px 15px rgba(0, 128, 128, 0.3) !important; 
+}
+#hero{
+    height: 1000px;
+}
+/* Hero Section */
+.hero-section {
+    height: 100vh;
+    background: url('/uploads/assets/contact-us-hero.png') no-repeat center center/cover;
+    position: relative;
+  }
+  
+  .hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    animation: fadeIn 2s ease;
+  }
+  
+  .hero-overlay h1 {
+    font-size: 3.5rem;
+    margin: 0;
+  }
+  
+  .hero-overlay span {
+    color: #006666; /* Lighter Teal for emphasis */
+  }
+  
+  .hero-overlay p {
+    font-size: 1.5rem;
+  }
+  .hero-overlay ,.hero-btn, h1, p {
+    padding: 10px;
+ 
+  }
+  
+  .hero-overlay .hero-btn {
+    padding: 15px 30px;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    margin-top: 20px;
+    font-size: 1.2rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+  
+  .hero-overlay .hero-btn:hover {
+    transform: scale(1.1);
+  }
+  
+  /* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+/* Custom Scrollbar Styles for WebKit browsers (Chrome, Safari, Edge) */
+
+/* ... (كود تخصيص شريط التمرير الذي قدمته مسبقًا) ... */
+
+@media (max-width: 767px) { /* تطبيق هذه الأنماط على الشاشات الأصغر من 768 بكسل (عادة الأجهزة المحمولة) */
+    body::-webkit-scrollbar {
+        width: 8px; /* اجعله أرق على الموبايل */
+        height: 8px;
+    }
+
+    body::-webkit-scrollbar-thumb {
+        border: 2px solid var(--color-navy-teal-light); /* قلل حجم الحدود إذا قللت العرض */
+    }
+    /* يمكنك أيضًا إزالة تأثير التحويم إذا أردت، بالرغم من أنه لن يكون له تأثير على الموبايل عادة */
+    body::-webkit-scrollbar-thumb:hover {
+        background:  #008080; /* عودة إلى اللون الأساسي بدلاً من لون التحويم */
+    }
+}
+/* WebKit-specific scrollbar pseudo-elements */
+body::-webkit-scrollbar {
+    width: 11px; /* عرض شريط التمرير الرأسي */
+    height: 10px; /* ارتفاع شريط التمرير الأفقي */
+}
+
+/* Track */
+body::-webkit-scrollbar-track {
+    background: #ffffff1f; 
+    border-radius: 2px; /* تقويس حواف المسار */
+}
+
+/* Handle (the draggable part) */
+body::-webkit-scrollbar-thumb {
+    background: var(--color-navy-teal-light); /* لون المقبض */
+    border-radius: 2px; /* تقويس حواف المقبض */
+    border: 1px solid var( --color-light-gray); /* حدود حول المقبض تتطابق مع لون المسار لخلق تأثير هامش */
+}
+
+/* Handle on hover */
+body::-webkit-scrollbar-thumb:hover {
+    background: #008080; /* لون المقبض عند التحويم */
+}
+
+/* Corner (if both horizontal and vertical scrollbars are present) */
+body::-webkit-scrollbar-corner {
+    background: #ffffff1f;  /* لون الزاوية */
+}
+/* إخفاء سبينر Bootstrap */
+.spinner-border,
+.spinner-grow {
+    display: none !important;
+    visibility: hidden !important; /* لضمان الإخفاء التام */
+    width: 0 !important;
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+}
+
+/* إخفاء أيقونات Font Awesome الدوارة */
+.fas.fa-spinner,
+.fa-spinner.fa-spin {
+    display: none !important;
+    visibility: hidden !important;
+    width: 0 !important;
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+}
+
+/* ------------------------------------------- */
+/* --- تنسيقات أيقونة التحميل المخصصة الجديدة --- */
+/* ------------------------------------------- */
+
+/* تعريف حركة الدوران */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* تطبيق التنسيقات على أيقونة التحميل المخصصة */
+.loading-custom-icon {
+    width: 60px; /* يمكنك تعديل الحجم حسب رغبتك */
+    height: 60px; /* يمكنك تعديل الحجم حسب رغبتك */
+    object-fit: contain; /* للحفاظ على أبعاد الصورة ومنع تشوهها */
+    animation: spin 2s linear infinite; /* تطبيق الحركة الدائرية */
+    border-radius: 50%; /* لجعلها دائرية */
+    /* يمكنك إضافة ظل أو أي تنسيقات جمالية أخرى */
+    box-shadow: 0 0 10px rgba(0, 128, 128, 0.4); 
+}
+.mt-12{
+    padding-bottom: 30px;
+}
+.modalContentContainer{
+    display: flex   !important;
+    align-items: center !important;
+}
+.accordion {
+
+--bs-accordion-active-color: #ffffff;
+--bs-accordion-active-bg: var(--bs-primary-bg-subtle);
+}
+.accordion-button:not(.collapsed) {
+    color: var(--bs-accordion-active-color);
+    background-color: var(--bs-accordion-active-bg);
+}
+.accordion-item .accordion-header .accordion-button{
+    box-shadow: none !important;
+}
+.accordion-item .accordion-header .accordion-button :active{
+    box-shadow: 0 0 0 3px rgba(0, 128, 128, 0.25); /* Teal focus shadow */
+}

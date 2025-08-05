@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" xintegrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Livvic:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <link rel="stylesheet" href="/css/admin.css">
+    <style>
+        /* Optional: Add specific styles for category form if needed */
+        .image-preview-container { /* Changed from #imagePreviewContainer to class */
+            border: 1px dashed #ced4da;
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+            margin-top: 1rem;
+        }
+        .image-preview { /* Changed from #categoryImagePreview to class */
+            max-width: 100%;
+            max-height: 200px;
+            object-fit: contain;
+            border-radius: 5px;
+            display: none; /* Hidden by default */
+        }
+        .image-placeholder {
+            color: #6c757d;
+            font-style: italic;
+        }
+        /* Basic form-group styling for consistency if not using Bootstrap grid */
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        .form-group input[type="text"],
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ced4da;
+            border-radius: 0.25rem;
+        }
+        .btn-submit, .btn-cancel {
+            padding: 0.75rem 1.25rem;
+            border-radius: 0.25rem;
+            text-decoration: none;
+            display: inline-block;
+            margin-right: 1rem;
+            cursor: pointer;
+            border: none;
+        }
+        .btn-submit {
+            background-color: #007bff;
+            color: white;
+        }
+        .btn-submit:hover {
+            background-color: #0056b3;
+        }
+        .btn-cancel {
+            background-color: #6c757d;
+            color: white;
+        }
+        .btn-cancel:hover {
+            background-color: #5a6268;
+        }
+    </style>
+</head>
+<body>
+    <%- include('../partials/admin-header', { activePage: 'categories' }) %>
+    <main class="admin-container">
+        <h2 class="section-heading"><%= title %></h2> 
+
+        <form id="categoryForm" enctype="multipart/form-data">
+            <input type="hidden" id="categoryId" value="<%= typeof currentCategory !== 'undefined' && currentCategory._id ? currentCategory._id : '' %>">
+            
+            <div class="form-group">
+                <label for="name">Category Name:</label>
+                <input type="text" id="name" name="name" value="<%= typeof currentCategory !== 'undefined' && currentCategory.name ? currentCategory.name : '' %>" required>
+            </div>
+            <div class="form-group">
+                <label for="description">Description:</label>
+                <textarea id="description" name="description" rows="3" placeholder="Enter a short description for the category (optional)"><%= typeof currentCategory !== 'undefined' && currentCategory.description ? currentCategory.description : '' %></textarea>
+            </div>
+            <div class="form-group">
+                <label for="categoryImage">Category Image (Upload):</label>
+                <input type="file" id="categoryImage" name="categoryImage" accept="image/*" class="form-control">
+                <small class="form-text text-muted">Upload an image for the category icon/thumbnail.</small>
+                <div class="image-preview-container mt-2">
+                    <img id="categoryImagePreview" class="image-preview <%= typeof currentCategory !== 'undefined' && currentCategory.imageUrl ? '' : 'hidden' %>" src="<%= typeof currentCategory !== 'undefined' && currentCategory.imageUrl ? currentCategory.imageUrl : '#' %>" alt="Category Image Preview">
+                    <p id="categoryMediaPlaceholder" class="text-muted text-center flex-grow-1 <%= typeof currentCategory !== 'undefined' && currentCategory.imageUrl ? 'hidden' : '' %>">No image selected</p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="parentCategory">Parent Category (Optional):</label>
+                <select id="parentCategory" name="parentCategory" class="form-select">
+                    <option value="">No Parent (Top-level Category)</option>
+                    <% if (typeof categories !== 'undefined' && categories.length > 0) { %>
+                        <% categories.forEach(category => { %>
+                            <% if (typeof currentCategory === 'undefined' || !currentCategory._id || category._id.toString() !== currentCategory._id.toString()) { %>
+                                <option value="<%= category._id %>" <%= typeof currentCategory !== 'undefined' && currentCategory.parentCategory && currentCategory.parentCategory.toString() === category._id.toString() ? 'selected' : '' %>>
+                                    <%= category.name %>
+                                </option>
+                            <% } %>
+                        <% }); %>
+                    <% } %>
+                </select>
+                <small class="form-text text-muted">Select a parent category if this is a subcategory. Leave blank for a top-level category.</small>
+            </div>
+            
+            <%# ✅ NEW: isFeatured checkbox %>
+            <div class="form-check form-switch mb-3">
+                <input class="form-check-input" type="checkbox" id="isFeatured" name="isFeatured" <%= typeof currentCategory !== 'undefined' && currentCategory.isFeatured ? 'checked' : '' %>>
+                <label class="form-check-label" for="isFeatured">Featured on Homepage</label>
+            </div> 
+            <button type="submit" class="btn-submit" id="saveCategoryBtn"><i class="fas fa-save me-2"></i>Save Category</button>
+            <a href="/admin/categories" class="btn-cancel"><i class="fas fa-times-circle me-2"></i>Cancel</a>
+        </form>
+    </main>
+    
+    <%- include('../partials/admin-footer') %>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/toast.js"></script>
+    <script src="/js/auth.js"></script>
+    <script src="/js/admin-core.js"></script>
+    <script src="/js/admin-categories.js"></script>
+    <%# Removed inline script block from here %>
+</body>
+</html>

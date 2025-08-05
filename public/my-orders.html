@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Negroo Store - My Orders</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Inter Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome CSS CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+   <nav class="navbar fixed top-0 left-0 w-full z-50 bg-white py-4 px-6 md:px-6 lg:px-12 flex justify-between items-center rounded-b-lg scrolled">
+        <div class="flex items-center logo">
+            <a href="index.html" class="block"> <img src="/uploads/logos/Negeroo_logo.png" alt="Negroo Store Logo" class="h-10 md:h-12 w-auto"> </a>
+        </div>
+
+        <div class="hidden md:hidden lg:flex space-x-3">
+            <a href="index.html" class="nav-link-custom text-gray-700 hover:text-[#008080] font-medium">Home</a>
+            <a href="products.html" class="nav-link-custom text-gray-700 hover:text-[#008080] font-medium">Products</a>
+            <a href="categories.html" class="nav-link-custom text-gray-700 hover:text-[#008080] font-medium">Categories</a>
+            <a href="collections.html" class="nav-link-custom text-gray-700 hover:text-[#008080] font-medium">Collection</a>
+            <a href="contact-us.html" class="nav-link-custom text-gray-700 hover:text-[#008080] font-medium">Contact Us</a>
+        </div>
+
+        <div class="flex items-center space-x-4 md:space-x-6  .hide-on">
+            <div class="md:hidden lg:flex items-center space-x-4 sm:block hide-on-mobile" id="desktop-user-icons">
+                <a href="user-dashboard.html" class="nav-link-custom text-gray-700 hover:text-[#008080] transition duration-300 hidden" id="nav-profile-icon">
+                    <i class="fas fa-user-circle h-6 w-4"></i>
+                </a>
+                <a href="wishlist.html" class="nav-link-custom text-gray-700 hover:text-[#008080] transition duration-300 hidden" id="nav-wishlist-icon">
+                    <i class="fas fa-heart h-6 w-4"></i>
+                </a>
+                <a href="my-orders.html" class="nav-link-custom text-gray-700 hover:text-[#008080] transition duration-300 hidden" id="nav-myorders-icon">
+                    <i class="fas fa-box h-6 w-4"></i>
+                </a>
+                <a href="user-dashboard.html#notifications-content" class="nav-link-custom text-gray-700 hover:text-[#008080] transition duration-300 relative hidden" id="nav-notifications-icon">
+                    <i class="fas fa-bell h-6 w-4"></i>
+                    <span id="notification-count" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">0</span>
+                </a>
+                <a href="/admin" class="nav-link-custom text-gray-700 hover:text-[#008080] transition duration-300 hidden" id="admin-dashboard-icon">
+                    <i class="fas fa-tachometer-alt h-6 w-4"></i>
+                </a>
+                <button class="nav-link-custom text-gray-700 hover:text-[#008080] transition duration-300 hidden" id="logout-icon-button">
+                    <i class="fas fa-sign-out-alt h-6 w-4"></i>
+                </button>
+            </div>
+
+            <div class="hidden md:flex items-center space-x-4  hide-on-mobile hide-on-389" id="desktop-auth-icons">
+                <a href="login.html" class="nav-link-custom text-gray-700 hover:text-[#008080] transition duration-300 hidden" id="nav-login-icon">
+                    <i class="fas fa-sign-in-alt h-6 w-4"></i>
+                </a>
+                <a href="register.html" class="nav-link-custom text-gray-700 hover:text-[#008080] transition duration-300 hidden" id="nav-register-icon">
+                    <i class="fas fa-user-plus h-6 w-4"></i>
+                </a>
+            </div>
+
+            <button class="text-gray-700 hover:text-[#008080] transition duration-300" data-bs-toggle="modal" data-bs-target="#searchModal">
+                <i class="fas fa-search h-6 w-4"></i>
+            </button>
+            <button class="text-gray-700 hover:text-[#008080] transition duration-300 relative" id="open-mini-cart-btn">
+                <i class="fas fa-shopping-cart h-6 w-4"></i>
+                <span id="cart-item-count" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">0</span>
+            </button>
+            <button class="md:flex lg:hidden text-gray-700 hover:text-[#008080] transition duration-300" id="mobile-menu-button">
+                <i class="fas fa-bars h-6 w-4"></i>
+            </button>
+        </div>
+    </nav>
+
+
+    <div id="mobile-menu-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden"></div>
+    <div id="mobile-menu" class="fixed top-0 right-0 w-64 h-full bg-white shadow-lg z-50 transform translate-x-full transition-transform duration-300 ease-in-out p-4">
+        <div class="flex justify-end mb-4">
+            <button id="close-mobile-menu" class="text-gray-700 hover:text-[#008080]">
+                <i class="fas fa-times text-2xl"></i>
+            </button>
+        </div>
+        <ul class="flex flex-col space-y-4">
+            <li><a href="index.html" class="text-gray-800 hover:text-[#008080] text-lg font-medium">Home</a></li>
+            <li><a href="products.html" class="text-gray-800 hover:text-[#008080] text-lg font-medium">Products</a></li>
+            <li><a href="categories.html" class="text-gray-800 hover:text-[#008080] text-lg font-medium">Categories</a></li>
+            <li><a href="collections.html" class="text-gray-800 hover:text-[#008080] text-lg font-medium">Collection</a></li>
+            <li><a href="#" class="text-gray-800 hover:text-[#008080] text-lg font-medium">Contact</a></li>
+            <li class="border-t border-gray-200 pt-4 mt-4 hidden" id="mobile-nav-profile-link"><a href="user-dashboard.html" class="text-gray-800 hover:text-[#008080] text-lg font-medium"><i class="fas fa-user-circle mr-2"></i> My Account</a></li>
+            <li class="hidden" id="mobile-nav-wishlist-link"><a href="wishlist.html" class="text-gray-800 hover:text-[#008080] text-lg font-medium"><i class="fas fa-heart mr-2"></i> Wishlist</a></li>
+            <li class="hidden" id="mobile-nav-myorders-link"><a href="my-orders.html" class="text-gray-800 hover:text-[#008080] text-lg font-medium"><i class="fas fa-box mr-2"></i> My Orders</a></li>
+            <li class="hidden" id="mobile-nav-notifications-link"><a href="notifications.html" class="text-gray-800 hover:text-[#008080] text-lg font-medium"><i class="fas fa-bell mr-2"></i> Notifications (<span id="mobile-notification-count">0</span>)</a></li>
+            <li class="hidden" id="mobile-admin-dashboard-link"><a href="/admin/dashboard" class="text-gray-800 hover:text-[#008080] text-lg font-medium"><i class="fas fa-tachometer-alt mr-2"></i> Admin Dashboard</a></li>
+            <li id="mobile-nav-login-link"><a href="login.html" class="text-gray-800 hover:text-[#008080] text-lg font-medium">Login</a></li>
+            <li id="mobile-nav-register-link"><a href="register.html" class="text-gray-800 hover:text-[#008080] text-lg font-medium">Register</a></li>
+            <li class="hidden" id="mobile-nav-logout-link"><a href="#" id="mobile-logout-button" class="text-red-600 hover:text-red-800 text-lg font-medium">Logout</a></li>
+        </ul>
+    </div>
+
+
+    <main class="container mx-auto px-4 py-16 pt-[100px] md:pt-[120px]">
+        <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-8">My Orders</h2>
+
+        <div id="orders-list" class="bg-white shadow-lg rounded-xl p-6 md:p-8">
+             <div id="initial-loading-spinner-container" class="flex flex-col justify-center items-center py-8" style="min-height: 300px; width: 100%;">
+                <img src="/loading.png" alt="Loading Icon" class="loading-custom-icon mb-4" style="width: 60px; height: 60px; animation: spin 2s linear infinite;">
+                <p class="text-gray-500 text-lg">Loading content...</p>
+            </div>
+                </div>
+    </main>
+
+    <!-- Footer (from index.html) -->
+    <footer class="bg-gray-900 text-white py-10">
+        <div class="container mx-auto px-4 max-w-screen-2xl">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-center md:text-left">
+                <div class="col-span-full md:col-span-1 flex flex-col items-center md:items-center mb-6 md:mb-0">
+                    <a href="index.html" class="block mb-4">
+                        <img src="/uploads/logos/Negeroo-logo.png" alt="Negroo Store Logo" class="h-16 w-auto mx-auto md:mx-0">
+                    </a>
+                    <p class="text-gray-400 text-sm">
+                        Your ultimate destination for quality products. Shop smart, live well!
+                    </p>
+                    <div class="flex justify-center md:justify-start space-x-4 mt-4">
+                        <a href="https://facebook.com/yourstore" target="_blank" class="text-gray-400 hover:text-blue-600 transition duration-300"><i class="fab fa-facebook-f text-xl"></i></a>
+                        <a href="https://twitter.com/yourstore" target="_blank" class="text-gray-400 hover:text-blue-400 transition duration-300"><i class="fab fa-twitter text-xl"></i></a>
+                        <a href="https://instagram.com/yourstore" target="_blank" class="text-gray-400 hover:text-pink-500 transition duration-300"><i class="fab fa-instagram text-xl"></i></a>
+                        <a href="https://linkedin.com/company/yourstore" target="_blank" class="text-gray-400 hover:text-blue-700 transition duration-300"><i class="fab fa-linkedin-in text-xl"></i></a>
+                    </div>
+                </div>
+                <div class="d-flex mx-auto flex-col align-items-center">
+                    <h3 class="text-xl font-semibold mb-4">Stay Connected</h3>
+                    <p class="text-gray-400 mb-4">Subscribe to our newsletter for the latest updates and offers.</p>
+                    <form id="newsletter-form" class="flex flex-col sm:flex-row gap-2 mb-6">
+                        <input type="email" id="newsletter-email" placeholder="Your email address"
+                               class="flex-grow p-3 rounded-md bg-gray-800 border border-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-[#008080] focus:border-transparent"
+                               required>
+                        <button type="submit"
+                                class="bg-[#008080] text-white py-3 px-6 rounded-md hover:bg-[#006666] transition duration-300">
+                            Subscribe
+                        </button>
+                    </form>
+
+                    <h3 class="text-xl font-semibold mb-4">Payment Methods</h3>
+                    <div class="flex flex-wrap gap-3 justify-center md:justify-start">
+                        <img src="/uploads/assets/visa.svg" alt="Visa" class="h-8">
+                        <img src="/uploads/assets/mastercard.svg" alt="MasterCard" class="h-9">
+                        <img src="/uploads/assets/Meeza.png" alt="Meeza" class="h-9">
+                        <img src="/uploads/assets/cash.png" alt="COD" class="h-8">
+                    </div>
+                </div>
+            
+
+                <div class="col-span-full md:col-span-1 mb-6 md:mb-0">
+                    <h3 class="text-xl font-semibold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-[#008080] transition duration-300">Home</a></li>
+                        <li><a href="products.html" class="text-gray-400 hover:text-[#008080] transition duration-300">Products</a></li>
+                        <li><a href="categories.html" class="text-gray-400 hover:text-[#008080] transition duration-300">Categories</a></li>
+                        <li><a href="collections.html" class="text-gray-400 hover:text-[#008080] transition duration-300">Collections</a></li>
+                        <li><a href="contact-us.html" class="text-gray-400 hover:text-[#008080] transition duration-300">Contact Us</a></li>
+                        <li><a href="about.html" class="text-gray-400 hover:text-[#008080] transition duration-300">About Us</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-span-full md:col-span-1 mb-6 md:mb-0">
+                    <h3 class="text-xl font-semibold mb-4">Customer Service</h3>
+                    <ul class="space-y-2">
+                        <li><a href="privacy-policy.html" class="text-gray-400 hover:text-[#008080] transition duration-300">Privacy Policy</a></li>
+                        <li><a href="terms-of-service.html" class="text-gray-400 hover:text-[#008080] transition duration-300">Terms of Service</a></li>
+                        <li><a href="faq.html" class="text-gray-400 hover:text-[#008080] transition duration-300">FAQ</a></li>
+                        <li><a href="return-policy.html" class="text-gray-400 hover:text-[#008080] transition duration-300">Return Policy</a></li>
+                        <li><a href="shipping-info.html" class="text-gray-400 hover:text-[#008080] transition duration-300">Shipping Info</a></li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="border-t border-gray-700 pt-8 mt-8 text-center">
+                <p>© 2024 Negroo Store. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mini Cart Sidebar (from index.html) -->
+    <div class="mini-cart-sidebar" id="mini-cart-sidebar">
+        <div class="mini-cart-header">
+            <h4>Shopping Cart</h4>
+            <button class="mini-cart-close-btn" id="close-mini-cart-btn"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="mini-cart-items-container" id="mini-cart-items-container">
+            <p class="text-muted text-center">Your cart is empty.</p>
+        </div>
+        <div class="mini-cart-footer">
+            <div class="mini-cart-total">
+                <span>Total:</span>
+                <span id="mini-cart-total">EGP 0.00</span>
+            </div>
+            <a href="cart.html" class="cta-button w-full mb-2 text-center py-2 px-4 rounded-full">View Cart</a>
+            <a href="checkout.html" class="cta-button w-full text-center py-2 px-4 rounded-full" id="mini-cart-checkout-btn">Checkout</a>
+        </div>
+    </div>
+    <div class="mini-cart-overlay" id="mini-cart-overlay"></div>
+
+    <!-- Search Modal (from index.html) -->
+    <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="searchModalLabel">Search Products</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <ul class="nav nav-tabs mb-3" id="searchTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="text-search-tab" data-bs-toggle="tab" data-bs-target="#text-search" type="button" role="tab" aria-controls="text-search" aria-selected="true">Text Search</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="image-search-tab" data-bs-toggle="tab" data-bs-target="#image-search" type="button" role="tab" aria-controls="image-search" aria-selected="false">Image Search</button>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="searchTabContent">
+                        <div class="tab-pane fade show active" id="text-search" role="tabpanel" aria-labelledby="text-search-tab">
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" placeholder="Search products..." aria-label="Search products" id="modalSearchInput">
+                                <button class="btn btn-primary" type="button" id="modalTextSearchBtn">Search</button>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="image-search" role="tabpanel" aria-labelledby="image-search-tab">
+                            <div class="mb-3">
+                                <label for="imageSearchInput" class="form-label">Choose image to search</label>
+                                <input class="form-control" type="file" id="imageSearchInput" accept="image/*">
+                            </div>
+                            <div id="imagePreviewContainer" class="mt-2 p-2 border rounded text-center">
+                                <img id="imagePreview" src="#" alt="Image Preview" class="img-fluid" style="max-height: 150px; display: none;">
+                                <p class="text-muted mt-2" id="imagePreviewPlaceholder">No image selected</p>
+                            </div>
+                            <button class="btn btn-primary w-100 mt-3" type="button" id="modalImageSearchBtn" disabled>
+                                <i class="fas fa-camera me-2"></i> Search by Image
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container (from index.html) -->
+    <div class="toast-container position-fixed bottom-0 end-0 p-3"></div>
+
+    <!-- Product Variant Modal (from index.html) -->
+    <div class="modal fade" id="productVariantModal" tabindex="-1" aria-labelledby="productVariantModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="productVariantModalLabel">Select Product Options</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="modalLoadingSpinner" class="text-center py-5">
+                         <div id="initial-loading-spinner-container" class="flex flex-col justify-center items-center py-8" style="min-height: 300px; width: 100%;">
+                            <img src="/loading.png" alt="Loading Icon" class="loading-custom-icon mb-4" style="width: 60px; height: 60px; animation: spin 2s linear infinite;">
+                            <p class="text-gray-500 text-lg">Loading content...</p>
+                        </div>
+                    </div>
+                    <div id="modalContentContainer" class="row" style="display: none;">
+                        <div class="col-md-5">
+                            <img id="modalProductImage" src="" class="img-fluid rounded shadow-sm mb-3" alt="Product Image">
+                        </div>
+                        <div class="col-md-7">
+                            <h3 id="modalProductName" class="fw-bold mb-2"></h3>
+                            <p class="fs-4 fw-bold text-success mb-3" id="modalProductPrice"></p>
+                            <p class="text-muted mb-3"><strong>Availability:</strong> <span id="modalProductStock" class="fw-bold"></span></p>
+
+                            <div id="modalVariantsSection" class="mb-4">
+                                <!-- Variants will be loaded here dynamically -->
+                            </div>
+
+                            <div class="d-flex align-items-center mb-4">
+                                <label for="modalQuantityInput" class="form-label me-3 fw-bold fs-5">Quantity:</label>
+                                <div class="input-group" style="width: 150px;">
+                                    <button class="btn btn-outline-secondary" type="button" id="modalDecreaseQuantityBtn">-</button>
+                                    <input type="number" id="modalQuantityInput" value="1" min="1" class="form-control text-center">
+                                    <button class="btn btn-outline-secondary" type="button" id="modalIncreaseQuantityBtn">+</button>
+                                </div>
+                            </div>
+                            <button id="modalAddToCartBtn" class="btn btn-primary btn-lg w-100">
+                                <i class="fas fa-cart-plus me-2"></i> Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JavaScript Files -->
+    <script src="/js/auth.js"></script>
+    <script src="/js/toast.js"></script>
+    <script src="/js/cart.js"></script>
+    <script src="/js/notifications.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/my-orders.js"></script>
+</body>
+</html>
